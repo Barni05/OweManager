@@ -1,0 +1,39 @@
+# depslib dependency file v1.0
+1610599945 source:/home/barnabas/dev/Socket Related/CodeBlocks/Server/main.cpp
+	<iostream>
+	<sys/types.h>
+	<sys/socket.h>
+	<arpa/inet.h>
+	<unistd.h>
+	<string.h>
+	<string>
+	<vector>
+	<thread>
+	<pthread.h>
+	<mysql.h>
+	<vector>
+	<sstream>
+
+1476084334 /home/barnabas/softwares/Databasestuff/mysqlheaders/mysql.h
+	<sys/types.h>
+	<winsock.h>
+	"mysql_com.h"
+	"mysql_time.h"
+	"mysql_version.h"
+	"typelib.h"
+	"my_list.h"
+	"my_alloc.h"
+
+1476084348 /home/barnabas/softwares/Databasestuff/mysqlheaders/mysql_com.h
+
+1476084374 /home/barnabas/softwares/Databasestuff/mysqlheaders/mysql_time.h
+
+1476084384 /home/barnabas/softwares/Databasestuff/mysqlheaders/mysql_version.h
+	<custom_conf.h>
+
+1476084524 /home/barnabas/softwares/Databasestuff/mysqlheaders/typelib.h
+
+1476084570 /home/barnabas/softwares/Databasestuff/mysqlheaders/my_list.h
+
+1476084578 /home/barnabas/softwares/Databasestuff/mysqlheaders/my_alloc.h
+
