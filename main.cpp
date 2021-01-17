@@ -38,6 +38,7 @@ void debugPrint(std::string debtor, std::string credtitor, std::string amount, s
 
 MYSQL* connect_to_database();
 bool insert_owe(MYSQL* conn, owe_data* owe);
+bool delete_owe(MYSQL* conn, std::string id);
 
 fd_set fr, fw, fe;
 
@@ -133,7 +134,6 @@ static void talk(int clientSocket, MYSQL* conn)
         FD_SET(clientSocket, &fe);
         if(FD_ISSET(clientSocket, &fr))
         {
-            std::cout<<"New reqest isset"<<std::endl;
             char buff[256];
             int nRet = recv(clientSocket, &buff, 256, 0);
             if (nRet>0)
@@ -162,8 +162,11 @@ static void talk(int clientSocket, MYSQL* conn)
                 }else if(msg == "remove")
                 {
                     memset(buff, 0, 256);
-                    std::cout<<"Remove request"<<std::endl;
                     recv(clientSocket, buff, 256, 0);
+                    std::cout<<"Id received: "<<buff<<std::endl;
+                    std::string str_id(buff);
+                    delete_owe(conn, str_id);
+
                 }
             }else{
                 std::cout<<"Client with number "<<clientSocket<<" closed the connection"<<std::endl;
@@ -236,5 +239,23 @@ bool insert_owe(MYSQL* conn, owe_data* owe)
     }else{
         return false;
         std::cout<<"Record insertion failed"<<std::endl;
+    }
+}
+
+bool delete_owe(MYSQL* conn, std::string id)
+{
+    std::stringstream del;
+    int ret = 0;
+    del<<"DELETE FROM `owe` WHERE id=\""<<id<<"\"";
+    std::string query = del.str();
+    const char* ch_q = query.c_str();
+    ret = mysql_query(conn, ch_q);
+    if(ret == 0)
+    {
+        std::cout<<"Record deleted successfully"<<std::endl;
+        return true;
+    }else{
+        std::cout<<"Failed to delete record"<<std::endl;
+        return false;
     }
 }
